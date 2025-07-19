@@ -1,7 +1,7 @@
 import { readFile, writeFile } from 'fs';
 import { join } from 'path';
 
-const envFilePath = join(__dirname, '../src/environments/environment.ts');
+const envFilePath = new URL('../src/environments/environment.ts', import.meta.url).pathname;
 const apiBaseUrl = process.env.API_BASE_URL;
 
 readFile(envFilePath, 'utf8', (err, data) => {
