@@ -1,0 +1,9 @@
+[build]
+  publish = "dist/strp-frontend/browser"
+  command = "ng build"
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+[[plugins]]
+  package = "@netlify/angular-runtime"
