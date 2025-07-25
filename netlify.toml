@@ -1,6 +1,6 @@
 [build]
-  publish = "node public/script.js && npm run build -- --configuration=production"
-  command = "ng build"
+  publish = "dist/strp-frontend/browser"
+  command = "node public/script.js && npm run build -- --configuration=production"
 [[redirects]]
   from = "/*"
   to = "/index.html"
