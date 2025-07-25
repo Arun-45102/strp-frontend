@@ -1,12 +1,101 @@
-<div class="navbar bg-base-100 shadow-sm sticky top-0 z-50">
-    <div class="flex-1">
-        <a class="btn btn-ghost text-xl">Senthamizh ReWritten</a>
+@if(user) {
+<header>
+    <!-- lg+ -->
+    <div class="relative bg-black">
+        <div class="absolute inset-0">
+            <img class="object-cover w-full h-full"
+                src="https://cdn.rareblocks.xyz/collection/celebration/images/headers/3/coworking-space.jpg" alt="" />
+        </div>
+
+        <div class="absolute inset-0 bg-black/30"></div>
+
+        <div class="relative px-4 mx-auto sm:px-6 lg:px-8">
+            <nav class="flex items-center justify-between h-16 lg:h-20">
+                <div class="flex-shrink-0">
+                    <a routerLink="/home" title="" class="flex">
+                        <!-- <img class="w-auto h-8 lg:h-10"
+                            src="https://cdn.rareblocks.xyz/collection/celebration/images/logo-alt.svg" alt="" /> -->
+                        <span class="font-bold text-2xl text-white">Senthamizh ReWritten</span>
+                    </a>
+                </div>
+
+                <!-- <button type="button"
+                    class="inline-flex p-2 text-white transition-all duration-200 rounded-md lg:hidden focus:bg-gray-800 hover:bg-gray-800">
+                    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16m-7 6h7" />
+                    </svg>
+                </button> -->
+
+                <div class="hidden lg:flex lg:items-center lg:space-x-10">
+                    <a routerLink="/home" title="" class="text-base font-medium text-white"> Home </a>
+
+                    <a routerLink="/roles" title="" class="text-base font-medium text-white"> Roles </a>
+
+                    <a routerLink="/roles" title="" class="text-base font-medium text-white"> Channels </a>
+
+                    <a routerLink="/users" title="" class="text-base font-medium text-white"> Users </a>
+                </div>
+                <div class="dropdown dropdown-end pt-1">
+                    <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+                        <div class="w-10 rounded-full">
+                            <img alt="Discord Avatar"
+                                [src]="`https://cdn.discordapp.com/avatars/${user.discordID}/${user.avatar}.png?size=128`"
+                                onerror="this.onerror=null;this.src=`https://placehold.co/96x96/cccccc/000000?text=No+Avatar`;" />
+                        </div>
+                    </div>
+                    <ul tabindex="0"
+                        class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+                        <li><a (click)="logout()">Logout</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
     </div>
-    <div class="flex-none">
-        <ul class="menu menu-horizontal px-1">
-            <li><a routerLink="/home">Home</a></li>
-            <li><a routerLink="/roles">Roles</a></li>
-            <li><a routerLink="/users">Users</a></li>
-        </ul>
-    </div>
-</div>
+
+    <!-- xs to lg -->
+    <nav class="flex flex-col justify-between w-full max-w-xs min-h-screen px-4 py-10 bg-black sm:px-6 lg:hidden">
+        <button type="button"
+            class="inline-flex p-2 text-white transition-all duration-200 rounded-md focus:bg-gray-800 hover:bg-gray-800">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
+
+        <div class="flex flex-col flex-grow h-full">
+            <nav class="flex flex-col flex-1 mt-10 space-y-2">
+                <a routerLink="/home" title=""
+                    class="flex w-full py-2 font-medium text-white transition-all duration-200 focus:text-opacity-70">
+                    Home </a>
+
+                <a routerLink="/roles" title=""
+                    class="flex w-full py-2 font-medium text-white transition-all duration-200 focus:text-opacity-70">
+                    Roles </a>
+
+                <a routerLink="/roles" title=""
+                    class="flex w-full py-2 font-medium text-white transition-all duration-200 focus:text-opacity-70">
+                    Channels </a>
+
+                <a routerLink="/users" title=""
+                    class="flex w-full py-2 font-medium text-white transition-all duration-200 focus:text-opacity-70">
+                    Users </a>
+            </nav>
+
+            <div class="dropdown dropdown-end pt-1">
+                <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+                    <div class="w-10 rounded-full">
+                        <img alt="Discord Avatar"
+                            [src]="`https://cdn.discordapp.com/avatars/${user.discordID}/${user.avatar}.png?size=128`"
+                            onerror="this.onerror=null;this.src=`https://placehold.co/96x96/cccccc/000000?text=No+Avatar`;" />
+                    </div>
+                </div>
+                <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+                    <li><a (click)="logout()">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+}

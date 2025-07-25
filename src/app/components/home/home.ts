@@ -1,7 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { Rest } from '../../services/rest';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Auth, DecodedToken } from '../../services/auth';
 
 @Component({
   selector: 'app-home',
@@ -11,21 +10,47 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class Home {
   message: string = 'Welcome to your dashboard!';
+  user: DecodedToken | null = null;
+  guildData: any;
+  events: any = [];
+
   private restService = inject(Rest);
-  private router = inject(Router);
+  private authService = inject(Auth);
 
   ngOnInit(): void {
-    this.guildData();
+    this.authService.user$.subscribe((user) => {
+      this.user = user;
+    });
+    this.fetchUserData(this.user?.discordID);
+    this.fetchUserRoles(this.user?.discordID);
+    this.fetchGuildData();
   }
 
-  logout(): void {
-    localStorage.removeItem('authToken');
-    this.router.navigate(['/login']);
-  }
-
-  guildData() {
+  fetchGuildData() {
     this.restService.getGuildData().subscribe((data) => {
+      this.guildData = data;
+      this.fetchScheduledEvents(this.guildData);
+    });
+  }
+
+  fetchUserData(id: any) {
+    this.restService.getUserGuildData(id).subscribe((data) => {
       console.log(data);
+    });
+  }
+
+  fetchUserRoles(id: any) {
+    this.restService.getUserGuildRoles(id).subscribe((data) => {
+      console.log(data);
+    });
+  }
+
+  fetchScheduledEvents(data: any) {
+    const listEvents = data?.guild?.scheduledEvents;
+    listEvents.forEach((event: any) => {
+      this.restService.getScheduledEvents(event).subscribe((data) => {
+        this.events.push(data?.events);
+      });
     });
   }
 }

@@ -3,3 +3,7 @@
     themes: light --default;
     root: ":root";
 }
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
