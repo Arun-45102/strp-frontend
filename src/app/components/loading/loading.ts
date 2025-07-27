@@ -1,21 +1,19 @@
-import { Component, inject } from '@angular/core';
-import { debounceTime } from 'rxjs';
+import { Component, inject, effect } from '@angular/core';
 import { Loadingservice } from '../../services/loadingservice';
 
 @Component({
   selector: 'app-loading',
+  standalone: true,
   imports: [],
   templateUrl: './loading.html',
   styleUrl: './loading.css',
 })
 export class Loading {
-  private loading = inject(Loadingservice);
-
-  isLoading = false;
+  public loading = inject(Loadingservice);
 
   constructor() {
-    this.loading.loading$
-      .pipe(debounceTime(200))
-      .subscribe((status) => (this.isLoading = status));
+    effect(() => {
+      this.loading.loading();
+    });
   }
 }

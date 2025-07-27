@@ -8,7 +8,6 @@ import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
 import {
-  HTTP_INTERCEPTORS,
   provideHttpClient,
   withFetch,
   withInterceptors,

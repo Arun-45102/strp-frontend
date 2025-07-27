@@ -1,22 +1,23 @@
-import { Component, inject } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Component, inject, signal, effect } from '@angular/core';
+import { Router, RouterLink, RouterModule } from '@angular/router';
 import { Auth, DecodedToken } from '../../services/auth';
 
 @Component({
   selector: 'app-navbar',
-  imports: [RouterLink],
+  standalone: true,
+  imports: [RouterLink, RouterModule],
   templateUrl: './navbar.html',
   styleUrl: './navbar.css',
 })
 export class Navbar {
-  user: DecodedToken | null = null;
+  user = signal<DecodedToken | null>(null);
   private router = inject(Router);
-
   private authService = inject(Auth);
 
-  ngOnInit(): void {
-    this.authService.user$.subscribe((user) => {
-      this.user = user;
+  constructor() {
+    effect(() => {
+      const user = this.authService.user();
+      this.user.set(user);
     });
   }
 

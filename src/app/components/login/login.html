@@ -1,61 +1,26 @@
-<!-- <div class="flex items-center justify-center h-210 bg-gray-100 p-5"
-    style="background-image: url(https://img.daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.webp);">
-    <div class="w-full max-w-md bg-white rounded-xl shadow-lg p-8 text-center">
-        <h1 class="text-3xl font-bold text-gray-800 mb-6">Login with Discord</h1>
-        <button (click)="loginWithDiscord()"
-            class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-75">
-            Login
-        </button>
-        @if(errorMessage) {
-        <p class="text-red-500 mt-4">{{ errorMessage }}</p>
-        }
-    </div>
-</div> -->
-<section class="bg-white">
-    <div class="grid grid-cols-1 min-h-screen lg:grid-cols-2">
-        <div class="flex items-center justify-center px-4 py-10 bg-white sm:px-6 lg:px-8 sm:py-16 lg:py-24">
-            <div class="xl:w-full xl:max-w-sm 2xl:max-w-md xl:mx-auto">
-                <h2 class="text-3xl text-center font-bold leading-tight text-black sm:text-4xl">Login
-                </h2>
-                <div class="mt-6 space-y-3">
-                    <button (click)="loginWithDiscord()" type="button"
-                        class="relative inline-flex items-center justify-center w-full px-4 py-4 cursor-pointer text-base font-semibold text-gray-700 transition-all duration-200 bg-white border-2 border-gray-200 rounded-md hover:bg-gray-100 focus:bg-gray-100 hover:text-black focus:text-black focus:outline-none">
-                        <div class="absolute inset-y-0 left-0 p-4">
-                            <svg viewBox="0 0 256 199" class="w-6 h-6" xmlns="http://www.w3.org/2000/svg"
-                                preserveAspectRatio="xMidYMid">
-                                <path
-                                    d="M216.856 16.597A208.502 208.502 0 0 0 164.042 0c-2.275 4.113-4.933 9.645-6.766 14.046-19.692-2.961-39.203-2.961-58.533 0-1.832-4.4-4.55-9.933-6.846-14.046a207.809 207.809 0 0 0-52.855 16.638C5.618 67.147-3.443 116.4 1.087 164.956c22.169 16.555 43.653 26.612 64.775 33.193A161.094 161.094 0 0 0 79.735 175.3a136.413 136.413 0 0 1-21.846-10.632 108.636 108.636 0 0 0 5.356-4.237c42.122 19.702 87.89 19.702 129.51 0a131.66 131.66 0 0 0 5.355 4.237 136.07 136.07 0 0 1-21.886 10.653c4.006 8.02 8.638 15.67 13.873 22.848 21.142-6.58 42.646-16.637 64.815-33.213 5.316-56.288-9.08-105.09-38.056-148.36ZM85.474 135.095c-12.645 0-23.015-11.805-23.015-26.18s10.149-26.2 23.015-26.2c12.867 0 23.236 11.804 23.015 26.2.02 14.375-10.148 26.18-23.015 26.18Zm85.051 0c-12.645 0-23.014-11.805-23.014-26.18s10.148-26.2 23.014-26.2c12.867 0 23.236 11.804 23.015 26.2 0 14.375-10.148 26.18-23.015 26.18Z"
-                                    fill="#5865F2" />
-                            </svg>
-                        </div>
-                        Sign in with Discord
-                    </button>
-                </div>
-                @if(errorMessage) {
-                <p class="text-red-500 mt-4 text-center">{{ errorMessage }}</p>
-                }
-            </div>
-        </div>
-
-        <div class="flex items-center justify-center px-4 py-10 sm:py-16 lg:py-24 bg-gray-50 sm:px-6 lg:px-8">
-            <div>
-                <img class="w-full mx-auto"
-                    src="https://cdn.rareblocks.xyz/collection/celebration/images/signup/1/cards.png" alt="" />
-
-                <div class="w-full max-w-md mx-auto xl:max-w-xl">
-                    <h3 class="text-2xl font-bold text-center text-black">Senthamizh ReWritten</h3>
-                    <p class="leading-relaxed text-center text-gray-500 mt-2.5">All In One Place for Discord, FiveM
-                        details related to Senthamizh Roleplay</p>
-
-                    <div class="flex items-center justify-center mt-10 space-x-3">
-                        <div class="bg-orange-500 rounded-full w-20 h-1.5"></div>
-
-                        <div class="bg-gray-200 rounded-full w-12 h-1.5"></div>
-
-                        <div class="bg-gray-200 rounded-full w-12 h-1.5"></div>
+<div class="container d-flex flex-column">
+    <div class="row align-items-center justify-content-center g-0
+        min-vh-100">
+        <div class="col-12 col-md-8 col-lg-6 col-xxl-4 py-8 py-xl-0">
+            <!-- Card -->
+            <div class="card smooth-shadow-md">
+                <!-- Card body -->
+                <div class="card-body p-6">
+                    <div class="mb-4">
+                        <h1 class="h3 text-center">Senthamizh ReWritten</h1>
+                        <p class="mb-6 text-center">All In One Place for Discord, FiveM
+                            details related to Senthamizh Roleplay
+                        </p>
                     </div>
+                    <div class="mb-3 d-grid">
+                        <button (click)="loginWithDiscord()" class="btn btn-primary">
+                            <i class="bi bi-discord"></i>
+                            <span class="ms-2">Login with Discord</span>
+                        </button>
+                    </div>
+                    <span class="text-center text-danger">{{ errorMessage() }}</span>
                 </div>
             </div>
         </div>
     </div>
-</section>
+</div>
