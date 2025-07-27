@@ -1,5 +1,4 @@
-import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, debounceTime, Observable } from 'rxjs';
+import { inject, Injectable, signal } from '@angular/core';
 import { jwtDecode } from 'jwt-decode';
 
 export interface DecodedToken {
@@ -12,6 +11,7 @@ export interface DecodedToken {
   avatar: string;
   banner: string;
   tag: string;
+  roles: any;
   exp: number; // Expiration timestamp
   iat: number; // Issued at timestamp
 }
@@ -21,15 +21,13 @@ export interface DecodedToken {
 })
 export class Auth {
   private authTokenKey = 'authToken';
-  private userSubject: BehaviorSubject<DecodedToken | null>;
-  public user$: Observable<DecodedToken | null>;
+  private _user = signal<DecodedToken | null>(null);
+  user = this._user;
 
   constructor() {
     const initialToken = localStorage.getItem(this.authTokenKey);
     const initialUser = initialToken ? this.decodeToken(initialToken) : null;
-    this.userSubject = new BehaviorSubject<DecodedToken | null>(initialUser);
-    this.user$ = this.userSubject.asObservable();
-
+    this._user.set(initialUser);
     if (initialUser && this.isTokenExpired(initialUser.exp)) {
       this.logout();
     }
@@ -38,7 +36,7 @@ export class Auth {
   setAuthToken(token: string): void {
     localStorage.setItem(this.authTokenKey, token);
     const decodedUser = this.decodeToken(token);
-    this.userSubject.next(decodedUser);
+    this._user.set(decodedUser);
   }
 
   getAuthToken(): string | null {
@@ -47,12 +45,12 @@ export class Auth {
 
   isAuthenticated(): boolean {
     const token = this.getAuthToken();
-    return !!token && !this.isTokenExpired(this.userSubject.value?.exp);
+    return !!token && !this.isTokenExpired(this._user()?.exp);
   }
 
   logout(): void {
     localStorage.removeItem(this.authTokenKey);
-    this.userSubject.next(null);
+    this._user.set(null);
   }
 
   private decodeToken(token: string): DecodedToken | null {

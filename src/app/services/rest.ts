@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { catchError, Observable, throwError } from 'rxjs';
+import { catchError, throwError } from 'rxjs';
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -9,30 +9,41 @@ import { environment } from '../../environments/environment';
 export class Rest {
   private http = inject(HttpClient);
 
-  apiUrl = `${environment.apiUrl}/strp-api/discord`;
+  apiDiscordUrl = `${environment.apiUrl}/strp-api/discord`;
+  apiFiveMUrl = `${environment.apiUrl}/strp-api/fivem`;
 
-  getAuthDetails(): Observable<any> {
+  getAuthDetails() {
     const url = 'http://localhost:5000/auth/discord';
     return this.http.get(url).pipe(catchError(this.HandleError));
   }
 
-  getGuildData(): Observable<any> {
-    const url = `${this.apiUrl}/guild/getGuildData`;
+  getGuildData() {
+    const url = `${this.apiDiscordUrl}/guild/getGuildData`;
     return this.http.get(url);
   }
 
-  getScheduledEvents(id: any): Observable<any> {
-    const url = `${this.apiUrl}/guild/getScheduledEvents/${id}`;
+  getScheduledEvents(id: any) {
+    const url = `${this.apiDiscordUrl}/guild/getScheduledEvents/${id}`;
     return this.http.get(url);
   }
 
-  getUserGuildData(id: any): Observable<any> {
-    const url = `${this.apiUrl}/users/getUserData/${id}`;
+  getUserGuildData(id: any) {
+    const url = `${this.apiDiscordUrl}/users/getUserData/${id}`;
     return this.http.get(url);
   }
 
-  getUserGuildRoles(id: any): Observable<any> {
-    const url = `${this.apiUrl}/users/getUserRoles/${id}`;
+  getUserGuildRoles(id: any) {
+    const url = `${this.apiDiscordUrl}/users/getUserRoles/${id}`;
+    return this.http.get(url);
+  }
+
+  getOnlineMembers() {
+    const url = `${this.apiDiscordUrl}/users/getOnlineMembers`;
+    return this.http.get(url);
+  }
+
+  getFivemData() {
+    const url = `${this.apiFiveMUrl}/getFivemData`;
     return this.http.get(url);
   }
 
